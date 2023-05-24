@@ -95,7 +95,7 @@ REGION_SITES = {
     "UTR3": ["UTR3"],
     "UTR5": ["UTR5"],
 }
-REGIONS_QUANTILE = ["intron", "intergenic", "cds_utr_ncrna"]
+REGIONS_QUANTILE = ["intron", "cds_utr_ncrna"]
 REGIONS_MAP = {}
 TEMP_PATH = None
 
@@ -1076,9 +1076,9 @@ def run(peak_file,
         df_sites = df_txn.loc[df_txn["feature"].isin(REGION_SITES[region])]
         print(f"{len(df_sites)} thresholded sites on {region}")
         # Exit for less than 100 tXn
-        if len(df_sites) < 100:
-            print(f"less then 100 thresholded crosslink in {region}. Skipping {region}.")
-            continue
+        # if len(df_sites) < 100:
+        #    print(f"less then 100 thresholded crosslink in {region}. Skipping {region}.")
+        #    continue
         # Get all crosslinks in a given region
         df_xn_region = df_xn.loc[df_xn["feature"].isin(REGION_SITES[region])]
         print(f"{len(df_xn_region)} all sites on {region}")
@@ -1091,9 +1091,9 @@ def run(peak_file,
                 names=["chrom", "start", "end", "name", "score", "strand"], dtype={"chrom": str, "start": int, "end": int, "name": str, "score": float, "strand": str},
                 )
             # only continue analysis for region with over 100 thresholded sites
-            if len(df_sites) < 100:
-                print(f"less then 100 thresholded crosslink in {region}. Skipping {region}.")
-                continue
+            # if len(df_sites) < 100:
+            #    print(f"less then 100 thresholded crosslink in {region}. Skipping {region}.")
+            #    continue
         else:
             print('No thresholded sites found after intersecting with the peak file. Skipping region.')
             continue
