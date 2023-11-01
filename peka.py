@@ -1359,7 +1359,7 @@ def run(peak_file,
             for pos, count in pos_m.items():
                 kmer_occ_per_txl[motif][pos] = count * 100 / ntxn
         df_kmer_occ_per_txl = pd.DataFrame.from_dict(kmer_occ_per_txl, orient="index")
-        exported_columns = [i for i in range(-48, 51)]
+        exported_columns = df_kmer_occ_per_txl.columns.tolist()
         df_kmer_occ_per_txl = df_kmer_occ_per_txl[exported_columns]
         # # Save average distal occurrence (DtXn) and ntxn into tsv file.
         # df_distal = pd.DataFrame.from_dict(avg_distal_occ, orient='index', columns=["DtXn"])
